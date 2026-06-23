@@ -5,7 +5,11 @@ numpy
 opencv-python
 pillow
 scikit-image
+scipy
 tqdm
 einops
 matplotlib
 PyYAML
+thop
+ptflops
+pyiqa

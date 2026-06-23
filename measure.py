@@ -2,7 +2,7 @@
 """
 用法：
   # 完整流程（推理 + IQA + Params/GFlops）
-  python measure_metrics.py \
+  python measure.py \
       --ckpt /home/liu/LIUYUHUI/PromptIR-main2/train_ckpt/your.ckpt \
       --lq_dir /path/to/snow-real/lq \
       --save_dir ./results_snow_real \

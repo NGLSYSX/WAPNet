@@ -31,7 +31,13 @@ Create the environment using:
 
 ```bash
 conda env create -f env.yml
-conda activate <env_name>
+conda activate wapnet
+```
+
+Alternatively, install the required packages with:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
@@ -49,6 +55,7 @@ WAPNet/
 ├── env.yml                # Conda environment file
 ├── requirements.txt       # Python dependencies
 └── README.md              # Reproducibility instructions
+```
 
 ---
 
@@ -98,6 +105,8 @@ datasets/
         └── gt/
 ```
 
+In this repository, `Test1` corresponds to the Outdoor-Rain test subset reported in the paper.
+
 Please replace the dataset paths in the following commands according to your local directory.
 
 ### CDD-11 Dataset
@@ -135,14 +144,6 @@ python train.py \
   --num_workers 8
 ```
 
-
-In our local experiments, the training paths were:
-
-```text
-/home/liu/LIUYUHUI/snowdata/allweather/lq/
-/home/liu/LIUYUHUI/snowdata/allweather/gt/
-```
-
 After training, checkpoints will be saved in the directory specified by `--ckpt_dir`.
 
 ---
@@ -151,7 +152,7 @@ After training, checkpoints will be saved in the directory specified by `--ckpt_
 
 ### Testing on the All-Weather Benchmark
 
-The script `test_allweather.py` supports testing on multiple All-Weather subsets in a single run, including RainDrop, Snow100K-S, Snow100K-L, Test1, and Outdoor-Rain.
+The script `test_allweather.py` supports testing on multiple All-Weather subsets in a single run, including RainDrop, Snow100K-S, Snow100K-L, and Test1. In this repository, `Test1` corresponds to the Outdoor-Rain test subset reported in the paper.
 
 Run the following command:
 
@@ -205,10 +206,10 @@ python test_allweather.py \
   --num_workers 6 \
   --amp \
   --use_tta \
+  --no_save
 ```
 
 The script prints the PSNR and SSIM of each subset and the average result over all tested subsets.
-
 
 ---
 
@@ -225,6 +226,9 @@ Test1           | PSNR: xx.xxxx | SSIM: x.xxxx
 -------------------------------------------------------
 Average         | PSNR: xx.xxxx | SSIM: x.xxxx
 =======================================================
+```
+
+---
 
 ## 📏 Model Complexity Measurement
 
@@ -237,3 +241,17 @@ python measure.py \
   --ckpt checkpoints/<checkpoint_name>.ckpt \
   --skip_iqa \
   --img_size 256
+```
+
+Please replace `checkpoints/<checkpoint_name>.ckpt` with the checkpoint generated during training.
+
+The script reports the number of parameters and computational complexity of the model. If optional packages such as `thop`, `ptflops`, or `pyiqa` are installed, additional complexity or image-quality measurements can also be computed.
+
+---
+
+## 📌 Notes
+
+1. The degraded and clean images should have matched file names.
+2. Images whose sizes are not divisible by 8 are automatically cropped by the testing script.
+3. For fair comparison, the same checkpoint and the same test-set paths should be used when reproducing the reported results.
+4. Test-time augmentation improves output stability but increases inference time.

@@ -1,0 +1,11 @@
+torch==2.3.0
+torchvision
+lightning
+numpy
+opencv-python
+pillow
+scikit-image
+tqdm
+einops
+matplotlib
+PyYAML

@@ -177,8 +177,6 @@ python test_allweather.py \
   --snow100k_l_gt ./datasets/test/Snow100K-L/gt/ \
   --test1_lq ./datasets/test/Test1/lq/ \
   --test1_gt ./datasets/test/Test1/gt/ \
-  --outdoor_rain_lq ./datasets/test/Outdoor-Rain/lq/ \
-  --outdoor_rain_gt ./datasets/test/Outdoor-Rain/gt/ \
   --batch_size 1 \
   --num_workers 6 \
   --amp \
@@ -210,8 +208,6 @@ python test_allweather.py \
   --snow100k_l_gt ./datasets/test/Snow100K-L/gt/ \
   --test1_lq ./datasets/test/Test1/lq/ \
   --test1_gt ./datasets/test/Test1/gt/ \
-  --outdoor_rain_lq ./datasets/test/Outdoor-Rain/lq/ \
-  --outdoor_rain_gt ./datasets/test/Outdoor-Rain/gt/ \
   --batch_size 1 \
   --num_workers 6 \
   --amp \

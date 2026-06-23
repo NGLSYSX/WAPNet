@@ -2,38 +2,32 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-# Input Parameters
+# Basic settings
 parser.add_argument('--cuda', type=int, default=0)
+parser.add_argument('--epochs', type=int, default=200, help='maximum number of training epochs')
+parser.add_argument('--batch_size', type=int, default=6, help='batch size per GPU')
+parser.add_argument('--lr', type=float, default=2e-4, help='initial learning rate')
+parser.add_argument('--de_type', type=str, default='allweather', help='degradation type used for training')
+parser.add_argument('--patch_size', type=int, default=128, help='input patch size')
+parser.add_argument('--num_workers', type=int, default=8, help='number of dataloader workers')
+parser.add_argument('--num_gpus', type=int, default=1, help='number of GPUs used for training')
 
-parser.add_argument('--epochs', type=int, default=200, help='maximum number of epochs to train the total model.')
-parser.add_argument('--batch_size', type=int,default=6,help="Batch size to use per GPU")
-parser.add_argument('--lr', type=float, default=2e-4, help='learning rate of encoder.')
+# Dataset paths
+parser.add_argument('--data_file_dir', type=str, default='data_dir/', help='directory for data split files')
+parser.add_argument('--allweather_lq', type=str, default='./datasets/allweather/lq/', help='path to low-quality images of the All-Weather dataset')
+parser.add_argument('--allweather_gt', type=str, default='./datasets/allweather/gt/', help='path to ground-truth images of the All-Weather dataset')
 
-parser.add_argument('--de_type', nargs='+', default=['denoise_15', 'denoise_25', 'denoise_50', 'derain', 'dehaze'],
-                    help='which type of degradations is training and testing for.')
+# Output paths
+parser.add_argument('--output_path', type=str, default='output/', help='output save path')
+parser.add_argument('--ckpt_dir', type=str, default='checkpoints', help='directory for saving checkpoints')
+parser.add_argument('--log_dir', type=str, default='logs', help='directory for saving training logs')
+parser.add_argument('--results_dir', type=str, default='results', help='directory for saving inference outputs')
+parser.add_argument('--experiment_name', type=str, default='wapnet_allweather', help='experiment identifier')
 
-parser.add_argument('--patch_size', type=int, default=128, help='patchsize of input.')
-parser.add_argument('--num_workers', type=int, default=8, help='number of workers.')
+# Loss setting
+parser.add_argument('--lambda_cls', type=float, default=0.1, help='weight for auxiliary weather classification loss')
 
-# path
-parser.add_argument('--data_file_dir', type=str, default='data_dir/',  help='where clean images of denoising saves.')
-parser.add_argument('--allweather_lq', type=str, default='/home/liu/LIUYUHUI/snowdata/allweather/lq/', help='LQ images path')
-parser.add_argument('--allweather_gt', type=str, default='/home/liu/LIUYUHUI/snowdata/allweather/gt/', help='GT images path')
-parser.add_argument('--denoise_dir', type=str, default='data/Train/Denoise/',
-                    help='where clean images of denoising saves.')
-parser.add_argument('--derain_dir', type=str, default='data/Train/Derain/',
-                    help='where training images of deraining saves.')
-parser.add_argument('--dehaze_dir', type=str, default='data/Train/Dehaze/',
-                    help='where training images of dehazing saves.')
-parser.add_argument('--output_path', type=str, default="output/", help='output save path')
-parser.add_argument('--ckpt_path', type=str, default="ckpt/Denoise/", help='checkpoint save path')
-parser.add_argument("--wblogger",type=str,default="promptir",help = "Determine to log to wandb or not and the project name")
-parser.add_argument("--ckpt_dir",type=str,default="train_ckpt",help = "Name of the Directory where the checkpoint is to be saved")
-parser.add_argument("--num_gpus",type=int,default= 1,help = "Number of GPUs to use for training")
-
-parser.add_argument("--experiment_name", type=str, default="", help="Experiment identifier (used for log/ckpt/results subfolders when non-empty)")
-parser.add_argument("--lambda_cls", type=float, default=0.1, help="Weight for auxiliary weather classification loss")
-parser.add_argument("--log_dir", type=str, default="logs", help="Root directory for TensorBoard logs")
-parser.add_argument("--results_dir", type=str, default="results", help="Root directory for inference outputs")
+# Optional logger name
+parser.add_argument('--wblogger', type=str, default='wapnet', help='wandb project name or logger identifier')
 
 options = parser.parse_args()

@@ -40,19 +40,15 @@ conda activate <env_name>
 
 ```text
 WAPNet/
-├── data_dir/              # Dataset loading and data-related utilities
 ├── net/                   # Network architecture and model modules
 ├── utils/                 # Utility functions
 ├── train.py               # Training script
-├── test_allweather.py     # Testing script for All-Weather benchmark
-├── test.py                # General testing script
-├── demo.py                # Demo inference script
-├── measure.py             # Evaluation utilities
+├── test_allweather.py     # Testing script for the All-Weather benchmark
+├── measure.py             # Model complexity and no-reference IQA measurement script
 ├── options.py             # Argument and configuration settings
 ├── env.yml                # Conda environment file
-├── INSTALL.md             # Installation notes
+├── requirements.txt       # Python dependencies
 └── README.md              # Reproducibility instructions
-```
 
 ---
 
@@ -97,10 +93,7 @@ datasets/
     ├── Snow100K-L/
     │   ├── lq/
     │   └── gt/
-    ├── Test1/
-    │   ├── lq/
-    │   └── gt/
-    └── Outdoor-Rain/
+    └── Test1/              # Outdoor-Rain test subset
         ├── lq/
         └── gt/
 ```
@@ -233,3 +226,14 @@ Test1           | PSNR: xx.xxxx | SSIM: x.xxxx
 Average         | PSNR: xx.xxxx | SSIM: x.xxxx
 =======================================================
 
+## 📏 Model Complexity Measurement
+
+The script `measure.py` is used to measure the number of parameters and computational complexity of WAPNet.
+
+Run:
+
+```bash
+python measure.py \
+  --ckpt checkpoints/<checkpoint_name>.ckpt \
+  --skip_iqa \
+  --img_size 256

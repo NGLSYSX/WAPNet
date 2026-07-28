@@ -69,6 +69,12 @@ The All-Weather dataset for all-in-one adverse weather image restoration can be 
 https://drive.google.com/file/d/1tfeBnjZX1wIhIFPl6HOzzOKOyo0GdGHl/view?usp=sharing
 ```
 
+The CDD-11 dataset can be downloaded from:
+
+```text
+[https://drive.google.com/file/d/1tfeBnjZX1wIhIFPl6HOzzOKOyo0GdGHl/view?usp=sharing](https://onedrive.live.com/?redeem=aHR0cHM6Ly8xZHJ2Lm1zL2YvcyFBczNyQ0RST25yYkxncXBlekc0c2FvLXU5ZGREaHc%5FZT1BMFJFSHg&id=CBB69E4E3408EBCD%2138238&cid=CBB69E4E3408EBCD)
+```
+
 The corresponding data split files and text files can be downloaded from:
 
 ```text
